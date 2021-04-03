@@ -1,0 +1,36 @@
+﻿@model AuthorVM
+@{
+    ViewBag.Title = "AuthorList";
+}
+
+@if (Model.Authors.Count == 0)
+{
+    <div class="jumbotron">
+        Yazar kaydı yapmak icin @Html.ActionLink("tıklayınız", "AddAuthor")
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <tr>
+            <th>Kullanıcı Ismi</th>
+
+            <th>Statu</th>
+            <th colspan="3">Islemler</th>
+        </tr>
+        @foreach (Author item in Model.Authors)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.Status</td>
+                <td>@Html.ActionLink("Guncelle", "UpdateAuthor", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Pasif", "DeleteAuthor", new { id = item.ID }, new { @class = "btn btn-danger" })</td>
+                <td>@Html.ActionLink("Sil","DestroyAuthor",new { id=item.ID},new { @class="btn btn-danger"})</td>
+
+
+            </tr>
+        }
+
+    </table>
+}
+
